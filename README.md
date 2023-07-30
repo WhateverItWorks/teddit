@@ -1,7 +1,4 @@
 # teddit
-
-[teddit.net](https://discuss-old.whateveritworks.org)
-
 A free and open source alternative Reddit front-end focused on privacy.
 Inspired by the [Nitter](https://github.com/zedeus/nitter) project.
 
@@ -14,7 +11,7 @@ Inspired by the [Nitter](https://github.com/zedeus/nitter) project.
 #teddit:matrix.org
 ## Instances
 
-[teddit.net](https://discuss-old.whateveritworks.org) - Official instance
+[discuss-old.whateveritworks.org](https://discuss-old.whateveritworks.org) - Official instance
 
 Community instances:
 
