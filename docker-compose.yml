@@ -22,7 +22,7 @@ services:
 
   teddit-redis:
     container_name: teddit-redis
-    image: redis:6.2.13-alpine
+    image: redis:7.0.12-alpine
     command: redis-server
     environment:
       - REDIS_REPLICATION_MODE=master
