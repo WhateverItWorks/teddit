@@ -1,16 +1,33 @@
-# This docker-compose file is made for development purpose and build from source, if you want to use teddit in production, the README contains a production-ready docker-compose setup.
-
-version: "3.8"
+version: "3.7"
 
 services:
-
   teddit:
     container_name: teddit
-    build: .
+    hostname: teddit
+    image: teddit/teddit:latest
     environment:
+      - DOMAIN=changethis
+      - USE_HELMET=true
+      - USE_HELMET_HSTS=true
+      - TRUST_PROXY=true
+      - TRUST_PROXY_ADDRESS=127.0.0.1
+      - POST_COMMENTS_SORT=new
+      - CACHE_CONTROL_INTERVAL=1
+      - USE_COMPRESSION=false
+      - API_ENABLED=false
+      - API_FORCE_HTTPS=false
+      - REDDIT_APP_ID=changethis # https://old.reddit.com/prefs/apps/
       - REDIS_HOST=teddit-redis
+      - THEME=dark
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8085:8080"
+    restart: always
+    tmpfs:
+      - /opt/app/.next/cache/:size=10M,mode=0770,uid=65534,gid=65534,noexec,nosuid,nodev
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     networks:
       - teddit_net
     healthcheck:
@@ -22,7 +39,17 @@ services:
 
   teddit-redis:
     container_name: teddit-redis
-    image: redis:7.0.12-alpine
+    hostname: teddit-redis
+    image: redis:latest
+    restart: always
+    user: nobody
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /data:size=10M,mode=0770,uid=65534,gid=65534,noexec,nosuid,nodev
+    cap_drop:
+      - ALL
     command: redis-server
     environment:
       - REDIS_REPLICATION_MODE=master
