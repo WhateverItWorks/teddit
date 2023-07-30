@@ -1,4 +1,4 @@
-# teddit
+# teddit-reworked
 A free and open source alternative Reddit front-end focused on privacy.
 Inspired by the [Nitter](https://github.com/zedeus/nitter) project.
 
