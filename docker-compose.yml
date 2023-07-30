@@ -1,0 +1,33 @@
+# This docker-compose file is made for development purpose and build from source, if you want to use teddit in production, the README contains a production-ready docker-compose setup.
+
+version: "3.8"
+
+services:
+
+  teddit:
+    container_name: teddit
+    build: .
+    environment:
+      - REDIS_HOST=teddit-redis
+    ports:
+      - "8080:8080"
+    networks:
+      - teddit_net
+    healthcheck:
+      test: ["CMD", "wget" ,"--no-verbose", "--tries=1", "--spider", "http://localhost:8080/about"]
+      interval: 1m
+      timeout: 3s
+    depends_on:
+      - teddit-redis
+
+  teddit-redis:
+    container_name: teddit-redis
+    image: redis:6.2.5-alpine
+    command: redis-server
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    networks:
+      - teddit_net
+
+networks:
+  teddit_net:

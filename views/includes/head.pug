@@ -1,0 +1,74 @@
+if(user_preferences.theme === 'auto')
+  link(rel="stylesheet", type="text/css", href="/css/dark.css", media="(prefers-color-scheme: dark)")
+if(user_preferences.theme === 'dark')
+  link(rel="stylesheet", type="text/css", href="/css/dark.css")
+if(user_preferences.theme === 'sepia')
+  link(rel="stylesheet", type="text/css", href="/css/sepia.css")
+if(user_preferences.theme === 'nord')
+  link(rel="stylesheet", type="text/css", href="/css/nord.css")
+link(rel="stylesheet", type="text/css", href="/css/styles.css")
+link(rel="icon", type="image/png", sizes="32x32", href="/favicon.png")
+meta(property='og:site_name', content='teddit')
+meta(name="viewport", content="width=device-width, initial-scale=1.0")
+-
+  if(!user_preferences)
+    user_preferences = {}
+  
+  function kFormatter(num) {
+      return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+  }
+  
+  function toDateString(time) {
+    let d = new Date();
+    d.setTime(time*1000);
+    return d.toDateString();
+  }
+  
+  function toUTCString(time) {
+    let d = new Date();
+    d.setTime(time*1000);
+    return d.toUTCString();
+  }
+  
+  function secondsToMMSS(time) {
+    return new Date(time * 1000).toISOString().substr(14,5)
+  }
+  
+  function getFileExtension(url) {
+    try {
+      url = new URL(url)
+      let pathname = url.pathname
+      let file_ext = pathname.substring(pathname.lastIndexOf('.') + 1)
+      if(file_ext) {
+        return file_ext
+      } else {
+        return ''
+      }
+    } catch (error) {
+      console.error(`Invalid url supplied to getFileExtension(). URL: ${url}`, error)
+      return ''
+    }
+  }
+  
+  function cleanTitle(s) {
+    if(s) {
+      var re = /&(?:amp|#38|lt|#60|gt|#62|apos|#39|quot|#34);/g;
+      var unescaped = {
+        '&amp;': '&',
+        '&#38;': '&',
+        '&lt;': '<',
+        '&#60;': '<',
+        '&gt;': '>',
+        '&#62;': '>',
+        '&apos;': "'",
+        '&#39;': "'",
+        '&quot;': '"',
+        '&#34;': '"'
+      }
+      return s.replace(re, (m) => {
+        return unescaped[m]
+      })
+    } else {
+      return ''
+    }
+  }
