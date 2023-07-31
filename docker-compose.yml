@@ -4,7 +4,10 @@ services:
   teddit:
     container_name: teddit
     hostname: teddit
-    image: teddit/teddit:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #image: teddit/teddit:latest
     environment:
       - DOMAIN=changethis
       - USE_HELMET=true
@@ -14,9 +17,9 @@ services:
       - POST_COMMENTS_SORT=new
       - CACHE_CONTROL_INTERVAL=1
       - USE_COMPRESSION=false
-      - API_ENABLED=false
-      - API_FORCE_HTTPS=false
-      - REDDIT_APP_ID=changethis # https://old.reddit.com/prefs/apps/
+      - API_ENABLED=true
+      - API_FORCE_HTTPS=true
+      - REDDIT_APP_ID=changethis
       - REDIS_HOST=teddit-redis
       - THEME=dark
     ports:
