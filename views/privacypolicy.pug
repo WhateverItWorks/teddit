@@ -1,8 +1,8 @@
 doctype html
 html
   head
-    title privacy policy - teddit
-    meta(property='og:title', content='privacy policy - teddit')
+    title privacy policy - teddit-reworked
+    meta(property='og:title', content='privacy policy - teddit-reworked')
     include includes/meta_default.pug
     include includes/meta_description.pug
     include includes/head.pug
@@ -10,17 +10,17 @@ html
     include includes/topbar.pug
     .container
       .content
-        h1 Privacy policy
+        h1 Privacy Policy
         p This document concerns what data you provide to this website, the purpose of the data, how the data is stored, and how the data can be removed.
         h2 Data you directly provide
-        p None.
+        p The official instance collects no data, but community instances can collect data you should maybe contact your instance operator.
         h2 Data you passively provide
         p By default teddit logs fetched subreddit or post URL for debugging reasons.
         p No identifying information is logged, such as the visitor's cookie, timestamp, user-agent, or IP address. Here are a couple lines to serve as an example how the debug log looks like:
         code
           | Got frontpage key from redis.
           br
-          | Fetched the JSON from reddit.com/r/privacytoolsIO.
+          | Fetched the JSON from reddit.com/r/PrivacyGuides.
           br
           | Got frontpage key from redis.
           br
