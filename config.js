@@ -1,13 +1,13 @@
 const config = {
-  domain: process.env.DOMAIN || '127.0.0.1', // Or for example 'teddit.net'
-  use_reddit_oauth: process.env.USE_REDDIT_OAUTH === 'true' || false, // If false, teddit uses Reddit's public API. If true, you need to have your own Reddit app ID (enter the app ID to the "reddit_app_id" config key). 
-  cert_dir: process.env.CERT_DIR || '', // For example '/home/teddit/letsencrypt/live/teddit.net', if you are using https. No trailing slash.
-  theme: process.env.THEME || 'auto', // One of: 'dark', 'sepia', 'auto', ''. Auto theme uses browser's theme detection (Dark or White theme). White theme is set by the empty the option ('').
+  domain: process.env.DOMAIN || 'discuss-old.whateveritworks.org', // Set to your own domain name.
+  use_reddit_oauth: process.env.USE_REDDIT_OAUTH === 'true' || true, // If false, teddit uses Reddit's public API. If true, you need to have your own Reddit app ID (enter the app ID to the "reddit_app_id" config key).
+  reddit_app_id: process.env.REDDIT_APP_ID || '', // If "use_reddit_oauth" config key is set to true, you have to obtain your Reddit app ID. For testing purposes it's okay to use this project's default app ID. Create your Reddit app here: https://old.reddit.com/prefs/apps/. Make sure to create an "installed app" type of app.
+  theme: process.env.THEME || 'dark', // Set default theme to: 'dark', 'sepia', 'auto', ''. 
   clean_homepage: !('CLEAN_HOMEPAGE' in process.env) || process.env.CLEAN_HOMEPAGE === 'true', // Allows the clean homepage to be used (similar to invidious), instead of the usual reddit-like frontpage
-  flairs_enabled: !('FLAIRS_ENABLED' in process.env) || process.env.FLAIRS_ENABLED === 'true', // Enables the rendering of user and link flairs on teddit
+  flairs_enabled: !('FLAIRS_ENABLED' in process.env) || process.env.FLAIRS_ENABLED === 'true', // Enables the rendering of user and link flairs on teddit-reworked
   highlight_controversial: !('HIGHLIGHT_CONTROVERSIAL' in process.env) || process.env.HIGHLIGHT_CONTROVERSIAL === 'true', // Enables controversial comments to be indicated by a typographical dagger (†)
-  api_enabled: !('API_ENABLED' in process.env) || process.env.API_ENABLED === 'true', // Teddit API feature. Might increase loads significantly on your instance.
-  api_force_https: process.env.API_FORCE_HTTPS === 'true' || false, // Force HTTPS to Teddit API permalinks (see #285).
+  api_enabled: !('API_ENABLED' in process.env) || process.env.API_ENABLED === 'true', // Teddit-Reworked API feature. Might increase loads significantly on your instance.
+  api_force_https: process.env.API_FORCE_HTTPS === 'true' || true, // Force HTTPS to Teddit-Reworked API permalinks.
   video_enabled: !('VIDEO_ENABLED' in process.env) || process.env.VIDEO_ENABLED === 'true',
   redis_enabled: !('REDIS_ENABLED' in process.env) || process.env.REDIS_ENABLED === 'true', // If disabled, does not cache Reddit API calls
   redis_db: process.env.REDIS_DB,
@@ -16,21 +16,17 @@ const config = {
   redis_port: process.env.REDIS_PORT || 6379,
   ssl_port: process.env.SSL_PORT || 8088,
   nonssl_port: process.env.NONSSL_PORT || 8080,
-  listen_address: process.env.LISTEN_ADDRESS || '0.0.0.0',  // '0.0.0.0' will accept connections only from IPv4 addresses. If you want to also accept IPv6 addresses use '::'.
-  https_enabled: process.env.HTTPS_ENABLED === 'true' || false,
-  redirect_http_to_https: process.env.REDIRECT_HTTP_TO_HTTPS === 'true' || false,
-  redirect_www: process.env.REDIRECT_WWW === 'true' || false,
-  use_compression: !('USE_COMPRESSION' in process.env) || process.env.USE_COMPRESSION === 'true',
+  listen_address: process.env.LISTEN_ADDRESS || '0.0.0.0',  // do not touch this, Unless you know what your doing.
+  use_compression: !('USE_COMPRESSION' in process.env) || process.env.USE_COMPRESSION === 'false',
   use_view_cache: process.env.USE_VIEW_CACHE === 'true' || false,
-  use_helmet: process.env.USE_HELMET === 'true' || false, // Recommended to be true when using https
-  use_helmet_hsts: process.env.USE_HELMET_HSTS === 'true' || false, // Recommended to be true when using https
-  trust_proxy: process.env.TRUST_PROXY === 'true' || false, // Enable trust_proxy if you are using reverse proxy like nginx
+  use_helmet: process.env.USE_HELMET === 'true' || true, // Recommended to be true when using https
+  use_helmet_hsts: process.env.USE_HELMET_HSTS === 'true' || true, // Recommended to be true when using https
+  trust_proxy: process.env.TRUST_PROXY === 'true' || true, // Enable trust_proxy if you are using reverse proxy like nginx
   trust_proxy_address: process.env.TRUST_PROXY_ADDRESS || '127.0.0.1',
   http_proxy: process.env.HTTP_PROXY,
   nsfw_enabled: !('NSFW_ENABLED' in process.env) || process.env.NSFW_ENABLED === 'true', // Enable NSFW (over 18) content. If false, a warning is shown to the user before opening any NSFW post. When the NFSW content is disabled, NSFW posts are hidden from subreddits and from user page feeds. Note: Users can set this to true or false from their preferences.
-  videos_muted: !('VIDEOS_MUTED' in process.env) || process.env.VIDEOS_MUTED === 'true', // Automatically mute all videos in posts
+  videos_muted: !('VIDEOS_MUTED' in process.env) || process.env.VIDEOS_MUTED === 'false', // Automatically mute all videos in posts
   post_comments_sort: process.env.POST_COMMENTS_SORT || 'confidence', // "confidence" is the default sorting in Reddit. Must be one of: confidence, top, new, controversial, old, random, qa, live.
-  reddit_app_id: process.env.REDDIT_APP_ID || 'ABfYqdDc9qPh1w', // If "use_reddit_oauth" config key is set to true, you have to obtain your Reddit app ID. For testing purposes it's okay to use this project's default app ID. Create your Reddit app here: https://old.reddit.com/prefs/apps/. Make sure to create an "installed app" type of app.
   domain_replacements: process.env.DOMAIN_REPLACEMENTS
     ? (JSON.parse(process.env.DOMAIN_REPLACEMENTS).map(([p, r]) => [new RegExp(p, 'gm'), r]))
     : [], // Replacements for domains in outgoing links. Tuples with regular expressions to match, and replacement values. This is in addition to user-level configuration of privacyDomains.
@@ -69,7 +65,7 @@ const config = {
     },
   },
   rate_limiting: {
-    enabled: false,
+    enabled: true,
     initial_limit: 100, // This is the amount of page loads one IP address can make in one minute without getting limited.
     limit_after_limited: 30 // When an IP is limited, this is the amount of page loads the IP can make in one minute.
   },
