@@ -7,21 +7,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    #image: teddit/teddit:latest
-    environment:
-      - DOMAIN=changethis
-      - USE_HELMET=true
-      - USE_HELMET_HSTS=true
-      - TRUST_PROXY=true
-      - TRUST_PROXY_ADDRESS=127.0.0.1
-      - POST_COMMENTS_SORT=new
-      - CACHE_CONTROL_INTERVAL=1
-      - USE_COMPRESSION=false
-      - API_ENABLED=true
-      - API_FORCE_HTTPS=true
-      - REDDIT_APP_ID=changethis
-      - REDIS_HOST=teddit-redis
-      - THEME=dark
     ports:
       - "127.0.0.1:8085:8080"
     restart: always
