@@ -11,9 +11,9 @@ const config = {
   video_enabled: !('VIDEO_ENABLED' in process.env) || process.env.VIDEO_ENABLED === 'true',
   redis_enabled: !('REDIS_ENABLED' in process.env) || process.env.REDIS_ENABLED === 'true', // If disabled, does not cache Reddit API calls
   redis_db: process.env.REDIS_DB,
-  redis_host: process.env.REDIS_HOST || '127.0.0.1',
+  redis_host: process.env.REDIS_HOST || 'teddit_redis',
   redis_password: process.env.REDIS_PASSWORD,
-  redis_port: process.env.REDIS_PORT || 6379,
+  redis_port: process.env.REDIS_PORT || ,
   ssl_port: process.env.SSL_PORT || 8088,
   nonssl_port: process.env.NONSSL_PORT || 8080,
   listen_address: process.env.LISTEN_ADDRESS || '0.0.0.0',  // do not touch this, Unless you know what your doing.
