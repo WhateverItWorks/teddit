@@ -23,11 +23,11 @@ services:
       interval: 1m
       timeout: 3s
     depends_on:
-      - teddit-redis
+      - teddit_redis
 
-  teddit-redis:
-    container_name: teddit-redis
-    hostname: teddit-redis
+  teddit_redis:
+    container_name: teddit_redis
+    hostname: teddit_redis
     image: redis:latest
     restart: always
     user: nobody
