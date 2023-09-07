@@ -13,7 +13,7 @@ const config = {
   redis_db: process.env.REDIS_DB,
   redis_host: process.env.REDIS_HOST || 'teddit_redis',
   redis_password: process.env.REDIS_PASSWORD,
-  redis_port: process.env.REDIS_PORT || ,
+  redis_port: process.env.REDIS_PORT || 6379,
   ssl_port: process.env.SSL_PORT || 8088,
   nonssl_port: process.env.NONSSL_PORT || 8080,
   listen_address: process.env.LISTEN_ADDRESS || '0.0.0.0',  // do not touch this, Unless you know what your doing.
