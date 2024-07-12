@@ -29,7 +29,7 @@
     "express": "^4.18.3",
     "helmet": "^7.1.0",
     "https-proxy-agent": "^7.0.4",
-    "minizlib": "^2.1.2",
+    "minizlib": "^3.0.1",
     "node-fetch": "^3.0.0",
     "postman-request": "^2.88.1-postman.30",
     "pug": "^3.0.3",
