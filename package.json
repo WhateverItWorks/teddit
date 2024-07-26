@@ -31,7 +31,7 @@
     "https-proxy-agent": "^7.0.4",
     "minizlib": "^3.0.1",
     "node-fetch": "^3.0.0",
-    "postman-request": "^2.88.1-postman.30",
+    "postman-request": "^2.88.1-postman.36",
     "pug": "^3.0.3",
     "redis": "^4.6.9"
   },
